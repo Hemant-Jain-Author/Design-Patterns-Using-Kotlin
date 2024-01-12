@@ -1,73 +1,58 @@
+open class Rectangle(var _height: Int, var _width: Int) {
 
-class Rectangle {
-    private int height;
-    private int width;
-
-    public Rectangle(int l, int w) {
-        this.height = l;
-        this.width = w;
+    open fun setWidth(w: Int) {
+        _width = w
     }
 
-    public void setWidth(int w) {
-        this.width = w;
+    open fun setHeight(h: Int) {
+        _height = h
     }
 
-    public void setHeight(int h) {
-        this.height = h;
+    fun getWidth(): Int {
+        return _width
     }
 
-    public int getWidth() {
-        return this.width;
-    }
-
-    public int getHeight() {
-        return this.height;
+    fun getHeight(): Int {
+        return _height
     }
 }
 
-class Square extends Rectangle {
-    public Square(int l) {
-        super(l, l);
+class Square(l: Int) : Rectangle(l, l) {
+
+    override fun setWidth(w: Int) {
+        super.setWidth(w)
+        super.setHeight(w)
     }
 
-    @Override
-    public void setWidth(int w) {
-        super.setWidth(w);
-        super.setHeight(w);
-    }
-
-    @Override
-    public void setHeight(int h) {
-        super.setWidth(h);
-        super.setHeight(h);
+    override fun setHeight(h: Int) {
+        super.setWidth(h)
+        super.setHeight(h)
     }
 }
 
-public class LiskovSubstitutionPrinciple {
-    public static void testRectangle() {
-        Rectangle r = new Rectangle(10, 20);
-        testRect(r);
-    }
+fun testRectangle() {
+    val r = Rectangle(10, 20)
+    testRect(r)
+}
 
-    public static void testSquare() {
-        Square s = new Square(10);
-        s.setWidth(20);
-        testRect(s);
-    }
+fun testSquare() {
+    val s = Square(10)
+    s.setWidth(20)
+    testRect(s)
+}
 
-    private static void testRect(Rectangle rect) {
-        rect.setHeight(10);
-        rect.setWidth(20);
-        if(200 == rect.getHeight() * rect.getWidth())
-            System.out.println("success");
-        else
-            System.out.println("failure");
-    }
+private fun testRect(rect: Rectangle) {
+    rect.setHeight(10)
+    rect.setWidth(20)
+    if (200 == rect.getHeight() * rect.getWidth())
+        println("success")
+    else
+        println("failure")
+}
 
-    public static void main(String[] args) {
-        testRectangle();
-        testSquare();
-    }
+fun main() {
+    testRectangle()
+    testSquare()
 }
 
 /*

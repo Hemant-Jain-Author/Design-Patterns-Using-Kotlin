@@ -1,38 +1,22 @@
-class Animal {
-    String name;
+open class Animal(val name: String)
 
-    public Animal(String name) {
-        this.name = name;
-    }
-}
-
-class Bird extends Animal {
-    public Bird(String name) {
-        super(name);
-    }
-
-    void fly() {
-        if (name.equals("Dodo")) {
-            System.out.println("The dodo is extinct and cannot fly.");
-        } else if (name.equals("Penguin")) {
-            System.out.println("The penguin cannot fly.");
-        } else if (name.equals("Eagle")) {
-            System.out.println("The eagle is soaring through the sky!");
-        } else if (name.equals("Sparrow")) {
-            System.out.println("The sparrow is fluttering its wings!");
+class Bird(name: String) : Animal(name) {
+    fun fly() {
+        when (name) {
+            "Dodo" -> println("The dodo is extinct and cannot fly.")
+            "Penguin" -> println("The penguin cannot fly.")
+            "Eagle" -> println("The eagle is soaring through the sky!")
+            "Sparrow" -> println("The sparrow is fluttering its wings!")
         }
     }
 }
 
-// Client code
-public class OpenClosedPrinciple2 {
-    public static void main(String[] args) {
-        Bird bird1 = new Bird("Eagle");
-        bird1.fly();
+fun main() {
+    val bird1 = Bird("Eagle")
+    bird1.fly()
 
-        Bird bird2 = new Bird("Dodo");
-        bird2.fly();
-    }
+    val bird2 = Bird("Dodo")
+    bird2.fly()
 }
 
 /*

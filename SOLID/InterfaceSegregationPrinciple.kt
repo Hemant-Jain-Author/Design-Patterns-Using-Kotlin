@@ -1,59 +1,51 @@
-
 interface Printable {
-    void print(String document);
+    fun print(document: String)
 }
 
 interface Scannable {
-    void scan();
+    fun scan()
 }
 
 interface Faxable {
-    void fax(String document);
+    fun fax(document: String)
 }
 
-class BasicInkjetPrinter implements Printable, Scannable {
-    @Override
-    public void print(String document) {
-        System.out.printf("Printing %s using basic inkjet printer%n", document);
+class BasicInkjetPrinter : Printable, Scannable {
+    override fun print(document: String) {
+        println("Printing $document using basic inkjet printer")
     }
 
-    @Override
-    public void scan() {
-        System.out.println("Scanning using basic inkjet printer");
+    override fun scan() {
+        println("Scanning using basic inkjet printer")
     }
 }
 
-class HighEndOfficePrinter implements Printable, Scannable, Faxable {
-    @Override
-    public void print(String document) {
-        System.out.printf("Printing %s using high end office printer%n", document);
+class HighEndOfficePrinter : Printable, Scannable, Faxable {
+    override fun print(document: String) {
+        println("Printing $document using high end office printer")
     }
 
-    @Override
-    public void scan() {
-        System.out.println("Scanning using high end office printer");
+    override fun scan() {
+        println("Scanning using high end office printer")
     }
 
-    @Override
-    public void fax(String document) {
-        System.out.printf("Faxing %s using high end office printer%n", document);
+    override fun fax(document: String) {
+        println("Faxing $document using high end office printer")
     }
 }
 
 // Client code
-public class InterfaceSegregationPrinciple {
-    public static void main(String[] args) {
-        // BasicInkjetPrinter
-        BasicInkjetPrinter basicPrinter = new BasicInkjetPrinter();
-        basicPrinter.print("Sample Document");
-        basicPrinter.scan();
+fun main() {
+    // BasicInkjetPrinter
+    val basicPrinter = BasicInkjetPrinter()
+    basicPrinter.print("Sample Document")
+    basicPrinter.scan()
 
-        // HighEndOfficePrinter
-        HighEndOfficePrinter officePrinter = new HighEndOfficePrinter();
-        officePrinter.print("Important Report");
-        officePrinter.scan();
-        officePrinter.fax("Confidential Memo");
-    }
+    // HighEndOfficePrinter
+    val officePrinter = HighEndOfficePrinter()
+    officePrinter.print("Important Report")
+    officePrinter.scan()
+    officePrinter.fax("Confidential Memo")
 }
 
 /*

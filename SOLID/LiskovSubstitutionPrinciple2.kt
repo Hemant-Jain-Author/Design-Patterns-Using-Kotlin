@@ -1,85 +1,60 @@
-abstract class Animal {
-    String name;
+abstract class Animal(val name: String)
 
-    Animal(String name) {
-        this.name = name;
-    }
-}
+open class Bird(name: String) : Animal(name) {
+    var flightHeight: Int = 0
 
-class Bird extends Animal {
-    int flightHeight;
-
-    Bird(String name) {
-        super(name);
-        this.flightHeight = 0;
-    }
-
-    void fly() {
+    open fun fly() {
         // To be implemented in subclasses
     }
 }
 
-class Sparrow extends Bird {
-    Sparrow(String name) {
-        super(name);
-    }
-
-    void fly() {
-        System.out.println("The sparrow is fluttering its wings.");
-        flightHeight = 100;
+class Sparrow(name: String) : Bird(name) {
+    override fun fly() {
+        println("The sparrow is fluttering its wings.")
+        flightHeight = 100
     }
 }
 
-class Penguin extends Bird {
-    Penguin(String name) {
-        super(name);
+class Penguin(name: String) : Bird(name) {
+    fun slide() {
+        println("The penguin is sliding on its belly!")
     }
 
-    void fly() {
-        System.out.println("The penguin cannot fly.");
+    fun swim() {
+        println("The penguin is swimming in the water!")
     }
 
-    void slide() {
-        System.out.println("The penguin is sliding on its belly!");
-    }
-
-    void swim() {
-        System.out.println("The penguin is swimming in the water!");
+    override fun fly() {
+        println("The penguin cannot fly.")
     }
 }
 
-class Dodo extends Bird {
-    Dodo(String name) {
-        super(name);
-    }
-
-    void fly() {
-        System.out.println("The dodo is extinct and cannot fly.");
+class Dodo(name: String) : Bird(name) {
+    override fun fly() {
+        println("The dodo is extinct and cannot fly.")
     }
 }
 
-public class LiskovSubstitutionPrinciple2 {
-    static void test(Bird bird) {
-        bird.fly();
-        if (bird.flightHeight > 0) {
-            System.out.println("Bird is flying at a positive height.");
-        } else {
-            System.out.println("Error: fly() method called; flight height is still zero.");
-        }
+fun test(bird: Bird) {
+    bird.fly()
+    if (bird.flightHeight > 0) {
+        println("Bird is flying at a positive height.")
+    } else {
+        println("Error: fly() method called; flight height is still zero.")
     }
+}
 
-    public static void main(String[] args) {
-        Sparrow sparrow = new Sparrow("Sparrow");
-        test(sparrow);
+fun main() {
+    val sparrow = Sparrow("Sparrow")
+    test(sparrow)
 
-        Penguin penguin = new Penguin("Penguin");
-        test(penguin);
-        penguin.slide();
-        penguin.swim();
+    val penguin = Penguin("Penguin")
+    test(penguin)
+    penguin.slide()
+    penguin.swim()
 
-        Dodo dodo = new Dodo("Dodo");
-        test(dodo);
-    }
+    val dodo = Dodo("Dodo")
+    test(dodo)
 }
 
 /*

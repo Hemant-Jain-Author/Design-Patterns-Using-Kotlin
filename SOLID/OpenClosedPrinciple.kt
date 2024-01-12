@@ -1,85 +1,52 @@
-class Animal {
-    String name;
+open class Animal(val name: String)
 
-    public Animal(String name) {
-        this.name = name;
-    }
-}
-
-class Bird extends Animal {
-    public Bird(String name) {
-        super(name);
-    }
-
-    void fly() {
+open class Bird(name: String) : Animal(name) {
+    open fun fly() {
         // Abstract method, to be overridden by subclasses
     }
 }
 
-class Dodo extends Bird {
-    public Dodo() {
-        super("Dodo");
-    }
-
-    @Override
-    void fly() {
-        System.out.println("The dodo is extinct and cannot fly.");
+class Dodo : Bird("Dodo") {
+    override fun fly() {
+        println("The dodo is extinct and cannot fly.")
     }
 }
 
-class Penguin extends Bird {
-    public Penguin() {
-        super("Penguin");
+class Penguin : Bird("Penguin") {
+    fun slide() {
+        println("The penguin is sliding on its belly!")
     }
 
-    @Override
-    void fly() {
-        System.out.println("The penguin cannot fly.");
+    fun swim() {
+        println("The penguin is swimming in the water!")
     }
 
-    void slide() {
-        System.out.println("The penguin is sliding on its belly!");
-    }
-
-    void swim() {
-        System.out.println("The penguin is swimming in the water!");
+    override fun fly() {
+        println("The penguin cannot fly.")
     }
 }
 
-class Eagle extends Bird {
-    public Eagle() {
-        super("Eagle");
-    }
-
-    @Override
-    void fly() {
-        System.out.println("The eagle is soaring through the sky!");
+class Eagle : Bird("Eagle") {
+    override fun fly() {
+        println("The eagle is soaring through the sky!")
     }
 }
 
-class Sparrow extends Bird {
-    public Sparrow() {
-        super("Sparrow");
-    }
-
-    @Override
-    void fly() {
-        System.out.println("The sparrow is fluttering its wings!");
+class Sparrow : Bird("Sparrow") {
+    override fun fly() {
+        println("The sparrow is fluttering its wings!")
     }
 }
 
-// Client code
-public class OpenClosedPrinciple {
-    public static void main(String[] args) {
-        Bird bird1 = new Eagle();
-        bird1.fly();
+fun main() {
+    val bird1: Bird = Eagle()
+    bird1.fly()
 
-        Bird bird2 = new Dodo();
-        bird2.fly();
+    val bird2: Bird = Dodo()
+    bird2.fly()
 
-        Bird bird3 = new Pigeon();
-        bird3.fly();
-    }
+    val bird3: Bird = Pigeon()
+    bird3.fly()
 }
 
 /*
@@ -88,17 +55,12 @@ The dodo is extinct and cannot fly.
 The pigeon is fluttering its wings!
 */
 
-class Pigeon extends Bird {
-    public Pigeon() {
-        super("Pigeon");
+class Pigeon : Bird("Pigeon") {
+    fun makeCooingSound() {
+        println("The pigeon is making a cooing sound.")
     }
 
-    void makeCooingSound() {
-        System.out.println("The pigeon is making a cooing sound.");
-    }
-
-    @Override
-    void fly() {
-        System.out.println("The pigeon is fluttering its wings!");
+    override fun fly() {
+        println("The pigeon is fluttering its wings!")
     }
 }

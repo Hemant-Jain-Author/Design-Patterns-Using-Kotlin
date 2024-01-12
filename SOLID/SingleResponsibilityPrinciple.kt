@@ -1,72 +1,59 @@
-class Animal {
-    String name;
+open class Animal(val name: String) {
 
-    public Animal(String name) {
-        this.name = name;
+    fun eat() {
+        println("$name is eating.")
     }
 
-    public void eat() {
-        System.out.println(name + " is eating.");
+    fun sleep() {
+        println("$name is sleeping.")
     }
 
-    public void sleep() {
-        System.out.println(name + " is sleeping.");
-    }
-
-    public void makeSound() {
-        System.out.println(name + " is making a sound.");
+    open fun makeSound() {
+        println("$name is making a sound.")
     }
 }
 
-class Mammal extends Animal {
-    public Mammal(String name) {
-        super(name);
-    }
+class Mammal(name: String) : Animal(name) {
 
-    public void giveBirth() {
-        System.out.println(name + " is giving birth to live young.");
+    fun giveBirth() {
+        println("$name is giving birth to live young.")
     }
 }
 
-class Reptile extends Animal {
-    public Reptile(String name) {
-        super(name);
-    }
+class Reptile(name: String) : Animal(name) {
 
-    public void layEggs() {
-        System.out.println(name + " is laying eggs.");
+    fun layEggs() {
+        println("$name is laying eggs.")
     }
 }
 
-class Bird extends Animal {
-    public Bird(String name) {
-        super(name);
+class Bird(name: String) : Animal(name) {
+
+    fun fly() {
+        println("$name is flying.")
     }
 
-    public void fly() {
-        System.out.println(name + " is flying.");
+    override fun makeSound() {
+        println("$name is making a sound.")
     }
 
-    public void layEggs() {
-        System.out.println(name + " is laying eggs.");
+    fun layEggs() {
+        println("$name is laying eggs.")
     }
 }
 
-// Client code.
-public class SingleResponsibilityPrinciple {
-    public static void main(String[] args) {
-        Mammal animal1 = new Mammal("Cat");
-        animal1.giveBirth();
-        animal1.makeSound();
+fun main() {
+    val animal1 = Mammal("Cat")
+    animal1.giveBirth()
+    animal1.makeSound()
 
-        Reptile animal2 = new Reptile("Snake");
-        animal2.layEggs();
-        animal2.eat();
+    val animal2 = Reptile("Snake")
+    animal2.layEggs()
+    animal2.eat()
 
-        Bird animal3 = new Bird("Eagle");
-        animal3.fly();
-        animal3.layEggs();
-    }
+    val animal3 = Bird("Eagle")
+    animal3.fly()
+    animal3.layEggs()
 }
 
 /*
