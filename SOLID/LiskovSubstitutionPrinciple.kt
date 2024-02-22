@@ -1,3 +1,21 @@
+abstract class Animal(val name: String) {
+    abstract fun makeSound()
+}
+
+class Dog(name: String) : Animal(name) {
+    override fun makeSound() {
+        println("woof woof!")
+    }
+}
+
+class Cat(name: String) : Animal(name) {
+    override fun makeSound() {
+        println("meow!")
+    }
+}
+
+
+
 open class Rectangle(var _height: Int, var _width: Int) {
 
     open fun setWidth(w: Int) {

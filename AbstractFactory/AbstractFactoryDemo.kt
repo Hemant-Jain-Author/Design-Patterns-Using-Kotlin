@@ -60,7 +60,7 @@ class MacFactory : AbstractFactory {
 }
 
 // Client code
-fun main(args: Array<String>) {
+fun main() {
     val macFactory: AbstractFactory = MacFactory()
     macFactory.menu.desc()
     macFactory.button.desc()
@@ -69,3 +69,10 @@ fun main(args: Array<String>) {
     winFactory.button.desc()
     winFactory.menu.desc()
 }
+
+/*
+Mac Menu!!
+Mac Button!!
+Win Button!!
+Win Menu!!
+*/

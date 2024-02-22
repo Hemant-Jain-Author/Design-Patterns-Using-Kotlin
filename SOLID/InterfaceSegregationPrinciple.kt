@@ -1,3 +1,9 @@
+abstract class Printer {
+    abstract fun print(document: String)
+    abstract fun scan()
+    abstract fun fax(document: String)
+}
+
 interface Printable {
     fun print(document: String)
 }
@@ -10,14 +16,11 @@ interface Faxable {
     fun fax(document: String)
 }
 
-class BasicInkjetPrinter : Printable, Scannable {
+class BasicInkjetPrinter : Printable {
     override fun print(document: String) {
         println("Printing $document using basic inkjet printer")
     }
 
-    override fun scan() {
-        println("Scanning using basic inkjet printer")
-    }
 }
 
 class HighEndOfficePrinter : Printable, Scannable, Faxable {
@@ -39,7 +42,6 @@ fun main() {
     // BasicInkjetPrinter
     val basicPrinter = BasicInkjetPrinter()
     basicPrinter.print("Sample Document")
-    basicPrinter.scan()
 
     // HighEndOfficePrinter
     val officePrinter = HighEndOfficePrinter()
@@ -50,7 +52,6 @@ fun main() {
 
 /*
 Printing Sample Document using basic inkjet printer
-Scanning using basic inkjet printer
 Printing Important Report using high end office printer
 Scanning using high end office printer
 Faxing Confidential Memo using high end office printer
