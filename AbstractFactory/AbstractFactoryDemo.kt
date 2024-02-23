@@ -1,3 +1,4 @@
+// Menu interface
 interface Menu {
     fun desc()
 }

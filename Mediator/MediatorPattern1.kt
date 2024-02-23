@@ -44,6 +44,7 @@ class ConcreteColleague2(mediator: Mediator) : Colleague(mediator, "Second") {
     }
 }
 
+// Client Code
 fun main() {
     val mediator = ConcreteMediator()
     val first = ConcreteColleague1(mediator)

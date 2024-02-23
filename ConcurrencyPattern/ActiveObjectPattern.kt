@@ -48,22 +48,20 @@ class Proxy(private val activeObject: ActiveObject) {
     }
 }
 
-// Example usage
-object ActiveObjectPattern {
-    @JvmStatic
-    fun main() {
-        // Create an instance of ActiveObject and Proxy
-        val activeObject = ActiveObject()
-        val proxy = Proxy(activeObject)
+// Client code.
+fun main() {
+    // Create an instance of ActiveObject and Proxy
+    val activeObject = ActiveObject()
+    val proxy = Proxy(activeObject)
 
-        // Start the ActiveObject thread
-        activeObject.start()
+    // Start the ActiveObject thread
+    activeObject.start()
 
-        // Invoke methods on the Proxy
-        proxy.invokeMethod { println("Hello") }
-        proxy.invokeMethod { println("World") }
+    // Invoke methods on the Proxy
+    proxy.invokeMethod { println("Hello") }
+    proxy.invokeMethod { println("World") }
 
-        // Stop the ActiveObject thread
-        activeObject.stopThread()
-    }
+    // Stop the ActiveObject thread
+    activeObject.stopThread()
 }
+

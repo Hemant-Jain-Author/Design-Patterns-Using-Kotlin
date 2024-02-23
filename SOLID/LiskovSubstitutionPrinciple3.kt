@@ -51,6 +51,7 @@ private fun testRect(rect: Rectangle) {
         println("failure")
 }
 
+// Client code
 fun main() {
     testRectangle()
     testSquare()

@@ -1,100 +1,80 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*
 
 // Model
 class Model {
-    private String data;
-    private List<View> observers;
+    private var data: String? = null
+    private val observers: MutableList<View> = ArrayList()
 
-    public Model() {
-        this.observers = new ArrayList<>();
+    fun setData(data: String) {
+        println("Model : Set data.")
+        this.data = data
+        notifyObservers()
     }
 
-    public void setData(String data) {
-        System.out.println("Model : Set data.");
-        this.data = data;
-        notifyObservers();
+    fun getData(): String? {
+        println("Model : Get data.")
+        return data
     }
 
-    public String getData() {
-        System.out.println("Model : Get data.");
-        return this.data;
+    fun addObserver(observer: View) {
+        observers.add(observer)
     }
 
-    public void addObserver(View observer) {
-        this.observers.add(observer);
+    fun removeObserver(observer: View) {
+        observers.remove(observer)
     }
 
-    public void removeObserver(View observer) {
-        this.observers.remove(observer);
-    }
-
-    public void notifyObservers() {
-        System.out.println("Model : Notify observers.");
-        for (View observer : observers) {
-            observer.update();
+    private fun notifyObservers() {
+        println("Model : Notify observers.")
+        for (observer in observers) {
+            observer.update()
         }
     }
 }
 
 // View
-class View {
-    private Controller controller;
-    private Model model;
-
-    public View(Model model, Controller controller) {
-        this.model = model;
-        this.controller = controller;
-        this.model.addObserver(this);
+class View(private val model: Model, private val controller: Controller) {
+    init {
+        model.addObserver(this)
+    }
+    fun update() {
+        println("View : Update.")
+        val data = model.getData()
+        println("Data: $data")
     }
 
-    public void update() {
-        System.out.println("View : Update.");
-        String data = model.getData();
-        System.out.println("Data: " + data);
-    }
-
-    public void getUserInput() {
-        try (Scanner scanner = new Scanner(System.in)) {
-            System.out.print("View : Enter user input: ");
-            //String userInput = "hello, world!";
-            //System.out.println(userInput);
-            String userInput = scanner.nextLine();
-            controller.handleUserInput(userInput);
-        }
+    fun getUserInput() {
+        //val scanner = Scanner(System.`in`)
+        print("View : Enter user input: ")
+        //val userInput = scanner.nextLine()
+        val userInput = "hello, world!";
+        println(userInput);
+        controller.handleUserInput(userInput)
     }
 }
 
 // Controller
-class Controller {
-    private Model model;
-    private View view;
+class Controller(private val model: Model) {
+    private lateinit var view: View
 
-    public Controller(Model m) {
-        this.model = m;
-    }
-
-    public void handleUserInput(String userInput) {
-        System.out.println("Controller : Handle user input.");
-        model.setData(userInput);
+    fun handleUserInput(userInput: String) {
+        println("Controller : Handle user input.")
+        model.setData(userInput)
         // Can inform view about action.
     }
 
-    public void setView(View v) {
-        this.view = v;
+    fun setView(view: View) {
+        this.view = view
     }
 }
 
-// Main class
-public class MVC {
-    public static void main(String[] args) {
-        Model model = new Model();
-        Controller controller = new Controller(model);  // The Controller sets itself as the observer in this case
-        View view = new View(model, controller);
-        controller.setView(view);
-        view.getUserInput();
-    }
+// Client code.
+fun main() {
+    val model = Model()
+    val controller = Controller(model)  // The Controller sets itself as the observer in this case
+    val view = View(model, controller)
+    controller.setView(view)
+    view.getUserInput()
 }
 
 /*
@@ -105,4 +85,4 @@ Model : Notify observers.
 View : Update.
 Model : Get data.
 Data: hello, world!
- */
+*/

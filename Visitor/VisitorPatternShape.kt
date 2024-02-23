@@ -58,6 +58,7 @@ class ObjectsStructure {
     }
 }
 
+// Client code
 fun main() {
     val os = ObjectsStructure()
     os.addShapes(Rectangle(6, 7, 8, 9))

@@ -1,4 +1,5 @@
 
+// ProductA interface
 interface ProductA {
     fun operationA()
 }

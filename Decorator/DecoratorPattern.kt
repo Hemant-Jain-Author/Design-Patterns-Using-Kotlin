@@ -1,3 +1,4 @@
+// Interface Component
 interface Component {
     fun operation()
 }

@@ -1,73 +1,55 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayList
 
 // Data Access Layer
 class DataAccessLayer {
-    private List<String> products;
+    private val products: MutableList<String> = ArrayList()
 
-    public DataAccessLayer() {
-        this.products = new ArrayList<>();
+    fun getData(): List<String> {
+        return products
     }
 
-    public List<String> getData() {
-        return this.products;
-    }
-
-    public void addData(String product) {
-        this.products.add(product);
+    fun addData(product: String) {
+        products.add(product)
     }
 }
 
 // Business Logic Layer
-class BusinessLogicLayer {
-    private DataAccessLayer dataAccess;
-
-    public BusinessLogicLayer(DataAccessLayer dataAccess) {
-        this.dataAccess = dataAccess;
+class BusinessLogicLayer(private val dataAccess: DataAccessLayer) {
+    fun getAllProducts(): List<String> {
+        return dataAccess.getData()
     }
 
-    public List<String> getAllProducts() {
-        return this.dataAccess.getData();
-    }
-
-    public void addProduct(String product) {
-        this.dataAccess.addData(product);
+    fun addProduct(product: String) {
+        dataAccess.addData(product)
     }
 }
 
 // Presentation Layer
-class PresentationLayer {
-    private BusinessLogicLayer businessLogic;
-
-    public PresentationLayer(BusinessLogicLayer businessLogic) {
-        this.businessLogic = businessLogic;
-    }
-
-    public void displayProducts() {
-        List<String> products = this.businessLogic.getAllProducts();
-        for (int i = 0; i < products.size(); i++) {
-            System.out.println((i + 1) + ". " + products.get(i));
+class PresentationLayer(private val businessLogic: BusinessLogicLayer) {
+    fun displayProducts() {
+        val products = businessLogic.getAllProducts()
+        products.forEachIndexed { index, product ->
+            println("${index + 1}. $product")
         }
     }
 
-    public void addProduct(String product) {
-        this.businessLogic.addProduct(product);
+    fun addProduct(product: String) {
+        businessLogic.addProduct(product)
     }
 }
 
-// Main class
-public class LayeredPattern {
-    public static void main(String[] args) {
-        DataAccessLayer dataAccess = new DataAccessLayer();
-        BusinessLogicLayer businessLogic = new BusinessLogicLayer(dataAccess);
-        PresentationLayer presentationLayer = new PresentationLayer(businessLogic);
+// Client code.
+fun main() {
+    val dataAccess = DataAccessLayer()
+    val businessLogic = BusinessLogicLayer(dataAccess)
+    val presentationLayer = PresentationLayer(businessLogic)
 
-        presentationLayer.addProduct("Apple");
-        presentationLayer.addProduct("Banana");
-        presentationLayer.addProduct("Mango");
-        presentationLayer.displayProducts();
-    }
+    presentationLayer.addProduct("Apple")
+    presentationLayer.addProduct("Banana")
+    presentationLayer.addProduct("Mango")
+    presentationLayer.displayProducts()
 }
+
 
 /*
 1. Apple

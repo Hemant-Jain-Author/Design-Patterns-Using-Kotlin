@@ -38,6 +38,7 @@ class Sparrow : Bird("Sparrow") {
     }
 }
 
+// Client code
 fun main() {
     val bird1: Bird = Eagle()
     bird1.fly()

@@ -28,6 +28,7 @@ class StoreOrderPacking : OrderPackingTemplate() {
     }
 }
 
+// Client code
 fun main() {
     val onlineOrder = OnlineOrderPacking()
     onlineOrder.packProduct()

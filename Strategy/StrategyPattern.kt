@@ -25,6 +25,7 @@ class Context(private var strategy: Strategy) {
     }
 }
 
+// Client code
 fun main() {
     val context = Context(ConcreteStrategy1())
     context.execute()

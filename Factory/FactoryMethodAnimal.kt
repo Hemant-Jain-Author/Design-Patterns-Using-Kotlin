@@ -4,7 +4,7 @@ abstract class Animal {
 
 class Dog : Animal() {
     override fun voice() {
-        println("Bhow Bhow!!")
+        println("Woof Woof!!")
     }
 }
 
@@ -39,28 +39,28 @@ fun main2() {
     catFactory.getAnimal().voice()
 }
 
+
+// Future changes to include cow type of objects.
+class Cow : Animal() {
+    override fun voice() {
+        println("Gooaa Gooaa!!")
+    }
+}
+
+class CowFactory : AnimalFactory() {
+    override fun getAnimal(): Animal {
+        return Cow()
+    }
+}
+
+// Client Code
 fun main() {
-    // Future changes to include cow type of objects.
-    class Cow : Animal() {
-        override fun voice() {
-            println("Gooaa Gooaa!!")
-        }
-    }
-
-    class CowFactory : AnimalFactory() {
-        override fun getAnimal(): Animal {
-            return Cow()
-        }
-    }
-
-    // Client Code
     val cowFactory: AnimalFactory = CowFactory()
     cowFactory.getAnimal().voice()
 }
 
-
 /*
-Bhow Bhow!!
+Woof Woof!!
 Meow Meow!!
 Gooaa Gooaa!!
 */

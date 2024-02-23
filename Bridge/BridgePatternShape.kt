@@ -1,49 +1,57 @@
-interface Shape {
-    fun draw()
+// Abstraction abstract class
+abstract class Shape(protected val imp: Colour) {
+    abstract fun draw()
 }
 
 // Rectangle class
-open class Rectangle(private val imp: Color) : Shape {
+class Rectangle(imp: Colour) : Shape(imp) {
     override fun draw() {
-        println("Drawing Rectangle with color " + imp.fill())
+        println("Drawing Rectangle with colour ${imp.fill()}")
     }
 }
 
 // Circle class
-class Circle(private val imp: Color) : Shape {
+class Circle(imp: Colour) : Shape(imp) {
     override fun draw() {
-        println("Drawing Circle with color " + imp.fill())
+        println("Drawing Circle with colour ${imp.fill()}")
     }
 }
 
-// Implementor interface
-interface Color {
+// Colour interface
+interface Colour {
     fun fill(): String
 }
 
 // Red class
-class Red : Color {
+class Red : Colour {
     override fun fill(): String {
         return "Red"
     }
 }
 
 // Green class
-class Green : Color {
+class Green : Colour {
     override fun fill(): String {
         return "Green"
     }
 }
 
+// Blue class
+class Blue : Colour {
+    override fun fill(): String {
+        return "Blue"
+    }
+}
+
 // Client code
 fun main() {
-    val c1 = Red()
-    val abstraction: Shape = Circle(c1)
+    val c1: Colour = Red()
+    var abstraction: Shape = Circle(c1)
     abstraction.draw()
 
-    val c2 = Green()
-    val abstraction2: Shape = Rectangle(c2)
-    abstraction2.draw()
+    val c2: Colour = Green()
+    abstraction = Rectangle(c2)
+    abstraction.draw()
 }
 
 /*

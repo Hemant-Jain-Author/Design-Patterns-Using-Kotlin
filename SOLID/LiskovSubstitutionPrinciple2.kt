@@ -44,6 +44,7 @@ fun test(bird: Bird) {
     }
 }
 
+// Client code
 fun main() {
     val sparrow = Sparrow("Sparrow")
     test(sparrow)

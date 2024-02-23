@@ -33,6 +33,7 @@ class ConcreteColleague(override val id: String, private val mediator: Mediator)
     }
 }
 
+// Client Code
 fun main() {
     val mediator: Mediator = ConcreteMediator()
     val first = ConcreteColleague("First", mediator)

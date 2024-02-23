@@ -11,6 +11,7 @@ class Bird(name: String) : Animal(name) {
     }
 }
 
+// Client code
 fun main() {
     val bird1 = Bird("Eagle")
     bird1.fly()

@@ -68,6 +68,7 @@ class CareTaker {
     }
 }
 
+// Client Code
 fun main() {
     val originator = Originator()
     val careTaker = CareTaker()

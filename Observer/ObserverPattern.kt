@@ -1,86 +1,74 @@
 import java.util.ArrayList
 
-// Subject interface
-interface Subject {
-    fun attach(observer: Observer)
-    fun detach(observer: Observer)
-    fun notifyObservers(newState: String?)
-}
-
-// ConcreteSubject class
-class ConcreteSubject : Subject {
-    private var state: String? = null
+abstract class Subject {
     private val observers: MutableList<Observer> = ArrayList()
 
-    fun getState(): String? {
-        return state
-    }
-
-    fun setState(arg: String) {
-        state = arg
-        notifyObservers(arg)
-    }
-
-    override fun attach(observer: Observer) {
+    fun attach(observer: Observer) {
         observer.subject = this
         observers.add(observer)
     }
 
-    override fun detach(observer: Observer) {
+    fun detach(observer: Observer) {
         observer.subject = null
         observers.remove(observer)
     }
 
-    override fun notifyObservers(newState: String?) {
-        for (observer in observers) {
-            observer.update(newState)
+    fun notifyObservers() {
+        observers.forEach { it.update() }
+    }
+}
+
+class ConcreteSubject : Subject() {
+    var state: String? = null
+        set(value) {
+            field = value
+            notifyObservers()
         }
-    }
 }
 
-// Observer interface
-interface Observer {
-    var subject: Subject?
-    fun update(newState: String?)
+abstract class Observer {
+    var subject: Subject? = null
+
+    abstract fun update()
 }
 
-// ConcreteObserver classes
-class ConcreteObserver1 : Observer {
-    override var subject: Subject? = null
-
+class ConcreteObserver1(subject: Subject) : Observer() {
     init {
-        subject?.attach(this)
+        subject.attach(this)
+        this.subject = subject
     }
 
-    override fun update(newState: String?) {
-        println("$newState notified to Observer1")
+    override fun update() {
+        println(if (subject is ConcreteSubject)
+            (subject as ConcreteSubject).state + " notified to Observer1"
+        else
+            "")
     }
 }
 
-class ConcreteObserver2 : Observer {
-    override var subject: Subject? = null
-
+class ConcreteObserver2(subject: Subject) : Observer() {
     init {
-        subject?.attach(this)
+        subject.attach(this)
+        this.subject = subject
     }
 
-    override fun update(newState: String?) {
-        println("$newState notified to Observer2")
+    override fun update() {
+        println(if (subject is ConcreteSubject)
+            (subject as ConcreteSubject).state + " notified to Observer2"
+        else
+            "")
     }
 }
 
+// Client code
 fun main() {
-    // Client Code
     val subject = ConcreteSubject()
-    val observer1 = ConcreteObserver1()
-    val observer2 = ConcreteObserver2()
-
-    subject.attach(observer1)
-    subject.attach(observer2)
-
-    subject.setState("First state")
-    subject.setState("Second state")
+    ConcreteObserver1(subject)
+    ConcreteObserver2(subject)
+    subject.state = "First state"
+    subject.state = "Second state"
 }
+
 
 /*
 First state notified to Observer1

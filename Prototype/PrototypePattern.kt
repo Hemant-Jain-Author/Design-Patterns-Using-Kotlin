@@ -44,6 +44,7 @@ object PrototypeRegistry {
     }
 }
 
+// Client Code
 fun main() {
     PrototypeRegistry.load()
     val c1 = PrototypeRegistry.getPrototype("CP1")

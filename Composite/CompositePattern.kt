@@ -1,3 +1,4 @@
+// Component
 abstract class Component {
     abstract fun operation()
 }

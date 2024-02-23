@@ -53,28 +53,27 @@ class Database private constructor() {
     }
 
     companion object {
-        private var _instance: Database? = null // Keep instance reference
-        val instance: Database
-            get() {
-                if (_instance == null) {
-                    _instance = Database()
-                }
-                return _instance
+        private var instance: Database? = null // Keep instance reference
+            
+        fun getInstance(): Database? {
+            if (instance == null) {
+                Database()
             }
-
-        @JvmStatic
-        fun main() {
-            val db1 = instance
-            val db2 = instance
-
-            println("Database Objects DB1: $db1")
-            println("Database Objects DB2: $db2")
-
-            db1.createTable()
-            db1.addData(1, "john")
-            db2.addData(2, "smith")
-
-            db1.display()
-        }
+            return instance
+        }    
     }
+}
+
+fun main() {
+    val db1 = Database.getInstance()
+    val db2 = Database.getInstance()
+
+    println("Database Objects DB1: $db1")
+    println("Database Objects DB2: $db2")
+
+    db1?.createTable() // Use safe call operator here
+    db1?.addData(1, "john")
+    db2?.addData(2, "smith")
+
+    db1?.display()
 }

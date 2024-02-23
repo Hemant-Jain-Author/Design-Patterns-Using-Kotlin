@@ -1,57 +1,47 @@
-public class SwissArmy {
-    
-}
+class DataProcessor(private val data: String) {
 
-public class DataProcessor {
-    private String data;
-
-    public DataProcessor(String data) {
-        this.data = data;
+    fun processData() {
+        validateData()
+        cleanData()
+        filterData()
+        sortData()
+        groupData()
+        calculateStatistics()
+        formatOutput()
     }
 
-    public void processData() {
-        validateData();
-        cleanData();
-        filterData();
-        sortData();
-        groupData();
-        calculateStatistics();
-        formatOutput();
-    }
-
-    private void validateData() {
+    private fun validateData() {
         // Validation logic
     }
 
-    private void cleanData() {
+    private fun cleanData() {
         // Data cleaning logic
     }
 
-    private void filterData() {
+    private fun filterData() {
         // Data filtering logic
     }
 
-    private void sortData() {
+    private fun sortData() {
         // Data sorting logic
     }
 
-    private void groupData() {
+    private fun groupData() {
         // Data grouping logic
     }
 
-    private void calculateStatistics() {
+    private fun calculateStatistics() {
         // Statistics calculation logic
     }
 
-    private void formatOutput() {
+    private fun formatOutput() {
         // Output formatting logic
-    }
-
-    // Example usage
-    public static void main(String[] args) {
-        String data = "exampleData";
-        DataProcessor processor = new DataProcessor(data);
-        processor.processData();
     }
 }
 
+// Client code
+fun main() {
+    val data = "exampleData"
+    val processor = DataProcessor(data)
+    processor.processData()
+}

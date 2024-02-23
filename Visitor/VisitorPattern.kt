@@ -39,6 +39,7 @@ class ConcreteVisitor2 : Visitor {
     }
 }
 
+// Client code
 fun main() {
     val visitor1: Visitor = ConcreteVisitor1()
     val elementA: Element = ConcreteElementA()

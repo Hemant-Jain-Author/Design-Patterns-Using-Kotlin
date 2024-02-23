@@ -19,6 +19,7 @@ class Proxy : Subject {
     }
 }
 
+// Client Code
 fun main() {
     val proxy = Proxy()
     proxy.request()

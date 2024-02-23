@@ -1,3 +1,4 @@
+// Flyweight interface
 interface Flyweight {
     fun operation(extrinsicState: String?)
 }
@@ -31,7 +32,7 @@ class ClientClass(factory: FlyweightFactory, intrinsicState: String, var extrins
     }
 }
 
-// Main class
+// Client Code
 fun main() {
     val factory = FlyweightFactory()
     val c = ClientClass(factory, "common", "separate1")

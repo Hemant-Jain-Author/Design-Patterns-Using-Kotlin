@@ -1,3 +1,4 @@
+// Abstract Expression
 interface Expression {
     fun interpret(): Int
 }
@@ -51,6 +52,7 @@ fun parseExpression(expression: String, context: Context): Expression {
     }
 }
 
+// Client Code
 fun main() {
     val context = Context()
     context.setValue("x", 10)

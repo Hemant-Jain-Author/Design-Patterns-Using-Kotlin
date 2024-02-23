@@ -29,6 +29,7 @@ class LazyBookParserProxy : BookParser {
     }
 }
 
+// Client Code
 fun main() {
     val proxy = LazyBookParserProxy()
     println(proxy.numPages())

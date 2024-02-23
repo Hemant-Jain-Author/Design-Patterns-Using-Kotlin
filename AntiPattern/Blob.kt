@@ -1,39 +1,34 @@
-public class Blob {
-    private String data;
+class Blob(private val data: String) {
 
-    public Blob(String data) {
-        this.data = data;
-    }
-
-    public void processData() {
+    fun processData() {
         // Process data
     }
 
-    public void validateData() {
+    fun validateData() {
         // Validate data
     }
 
-    public void saveData() {
+    fun saveData() {
         // Save data to database
     }
 
-    public void sendNotification() {
+    fun sendNotification() {
         // Send notification
     }
 
-    public void generateReport() {
+    fun generateReport() {
         // Generate report
     }
 
-    public void backupData() {
+    fun backupData() {
         // Backup data
     }
 
-    public void archiveData() {
+    fun archiveData() {
         // Archive data
     }
 
-    public void purgeData() {
+    fun purgeData() {
         // Purge data
     }
 

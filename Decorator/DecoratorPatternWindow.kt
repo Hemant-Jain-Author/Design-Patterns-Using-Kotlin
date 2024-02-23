@@ -1,3 +1,4 @@
+// Window (Component)
 interface Window {
     fun draw()
 }

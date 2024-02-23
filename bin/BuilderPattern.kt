@@ -1,3 +1,4 @@
+// Define the Product class with two parts
 open class Product(private var partA: String, private var partB: String) {
     fun setPartA(A: String) {
         this.partA = A

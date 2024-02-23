@@ -1,3 +1,4 @@
+// Agent (Invoker)
 class Agent {
     fun placeOrder(command: Order) {
         command.execute()

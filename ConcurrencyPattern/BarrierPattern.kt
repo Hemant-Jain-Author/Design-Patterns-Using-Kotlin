@@ -40,27 +40,44 @@ class Worker(private val barrier: Barrier, private val id: Int) : Runnable {
     }
 }
 
-object BarrierPattern {
-    @JvmStatic
-    fun main() {
-        val numWorkers = 3
-        val barrier = Barrier(numWorkers)
+// Client code.
+fun main() {
+    val numWorkers = 3
+    val barrier = Barrier(numWorkers)
 
-        val threads = arrayOfNulls<Thread>(numWorkers)
-        for (i in 0 until numWorkers) {
-            val worker = Worker(barrier, i)
-            threads[i] = Thread(worker)
-            threads[i]!!.start()
-        }
-
-        try {
-            for (t in threads) {
-                t!!.join()
-            }
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
-
-        println("All workers finished. Proceeding to the next step.")
+    val threads = arrayOfNulls<Thread>(numWorkers)
+    for (i in 0 until numWorkers) {
+        val worker = Worker(barrier, i)
+        threads[i] = Thread(worker)
+        threads[i]!!.start()
     }
+
+    try {
+        for (t in threads) {
+            t!!.join()
+        }
+    } catch (e: InterruptedException) {
+        e.printStackTrace()
+    }
+
+    println("All workers finished. Proceeding to the next step.")
 }
+
+/*
+Worker 0 started
+Worker 0 working...
+Worker 0 working...
+Worker 0 working...
+Worker 0 finished
+Worker 1 started
+Worker 1 working...
+Worker 1 working...
+Worker 1 working...
+Worker 1 finished
+Worker 2 started
+Worker 2 working...
+Worker 2 working...
+Worker 2 working...
+Worker 2 finished
+All workers finished. Proceeding to the next step.
+ */

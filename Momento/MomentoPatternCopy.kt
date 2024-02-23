@@ -77,6 +77,7 @@ class Originator {
     }
 }
 
+// Client Code
 fun main() {
     val originator = Originator()
     originator.setStateFun("State 1")

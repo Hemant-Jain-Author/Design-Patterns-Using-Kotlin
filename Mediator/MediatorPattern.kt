@@ -50,6 +50,7 @@ class Participant(override val name: String, private val chatRoom: IChatRoom) : 
     }
 }
 
+// Client Code
 fun main() {
     val chatRoom = ChatRoom()
     val james = Participant("James", chatRoom)

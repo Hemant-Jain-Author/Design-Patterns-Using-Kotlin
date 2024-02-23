@@ -14,12 +14,12 @@ class LinkedList : Iterable<Int?> {
         size++
     }
 
-    override fun iterator(): MutableIterator<Int> {
+    override fun iterator(): Iterator<Int> {
         return LinkedListIterator(this)
     }
 }
 
-class LinkedListIterator(var aggregate: LinkedList) : MutableIterator<Int> {
+class LinkedListIterator(var aggregate: LinkedList) : Iterator<Int> {
     var current: LinkedList.Node?
     var previous: LinkedList.Node? = null
 
@@ -40,20 +40,9 @@ class LinkedListIterator(var aggregate: LinkedList) : MutableIterator<Int> {
         current = current!!.next
         return value
     }
-
-    override fun remove() {
-        if (previous == null) {
-            throw IllegalStateException("next() must be called before remove()")
-        }
-        aggregate.size--
-        if (previous == null) {
-            aggregate.head = current
-        } else {
-            previous!!.next = current
-        }
-    }
 }
 
+// Client Code
 fun main() {
     val aggregate = LinkedList()
     for (i in 0..4) {

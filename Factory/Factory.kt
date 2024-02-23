@@ -1,4 +1,4 @@
-// Animal abstract class
+// Animal interface
 interface Animal {
     fun speak()
 }

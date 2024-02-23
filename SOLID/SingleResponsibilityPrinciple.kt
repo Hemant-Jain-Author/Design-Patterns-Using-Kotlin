@@ -42,6 +42,7 @@ class Bird(name: String) : Animal(name) {
     }
 }
 
+// Client code
 fun main() {
     val animal1 = Mammal("Cat")
     animal1.giveBirth()

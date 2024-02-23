@@ -1,3 +1,4 @@
+// Flyweight interface
 interface Flyweight {
     fun operation(extrinsicState: Any?)
 }

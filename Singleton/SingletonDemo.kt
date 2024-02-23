@@ -22,6 +22,7 @@ class Singleton private constructor() {
 
     companion object {
         private var instance: Singleton? = null
+        
         fun getInstance(): Singleton? {
             if (instance == null) {
                 Singleton()
@@ -31,18 +32,17 @@ class Singleton private constructor() {
     }
 }
 
-object SingletonDemo {
-    @JvmStatic
-    fun main() {
-        val s1 = Singleton.getInstance()
-        val s2 = Singleton.getInstance()
+fun main() {
+    val s1 = Singleton.getInstance()
+    val s2 = Singleton.getInstance()
 
-        println(s1)
-        println(s2)
+    println(s1)
+    println(s2)
 
-        s2!!.addData("Hello, world!")
-    }
-} /*
+    s2!!.addData("Hello, world!")
+}
+
+/*
 Database created
 Singleton@7344699f
 Singleton@7344699f

@@ -1,89 +1,73 @@
+import java.util.Scanner
 
-
-import java.util.Scanner;
-
-//Model
+// Model
 class Model {
-    private String data = "Default.";
+    var dataValue: String = "Default."
 
-    public void setData(String data) {
-        System.out.println("Model: Set data.");
-        this.data = data;
+    fun setData(data: String) {
+        println("Model: Set data.")
+        this.dataValue = data
     }
 
-    public String getData() {
-        System.out.println("Model: Get data.");
-        return data;
-    }
-}
-
-//View
-class View {
-    private ViewModel viewModel;
-
-    public View(ViewModel viewModel) {
-        this.viewModel = viewModel;
-    }
-
-    public void displayData() {
-        System.out.println("Display Data: " + viewModel.getData());
-    }
-
-    public void getUserInput() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("View: Enter user input: ");
-        String userInput = scanner.nextLine();
-        viewModel.setData(userInput);
+    fun getData(): String {
+        println("Model: Get data.")
+        return dataValue
     }
 }
 
 // ViewModel
-class ViewModel {
-    private Model model;
-
-    public ViewModel(Model model) {
-        this.model = model;
+class ViewModel(private val model: Model) {
+    fun setData(data: String) {
+        println("ViewModel: Set data.")
+        model.setData(data)
     }
 
-    public void setData(String data) {
-        System.out.println("ViewModel: Set data.");
-        model.setData(data);
+    fun getData(): String {
+        println("ViewModel: Get data.")
+        return model.getData()
+    }
+}
+
+// View
+class View(private val viewModel: ViewModel) {
+    fun displayData() {
+        println("Display Data: " + viewModel.getData())
     }
 
-    public String getData() {
-        System.out.println("ViewModel: Get data.");
-        return model.getData();
+    fun getUserInput() {
+        //val scanner = Scanner(System.`in`)
+        print("View: Enter user input: ")
+        //val userInput = scanner.nextLine()
+        val userInput = "Hello, World!"
+        println(userInput)
+        viewModel.setData(userInput)
     }
 }
 
 // Client code
-public class MVVM {
-    public static void main(String[] args) {
-        Model model = new Model();
-        ViewModel viewModel = new ViewModel(model);
-        View view = new View(viewModel);
+fun main() {
+    val model = Model()
+    val viewModel = ViewModel(model)
+    val view = View(viewModel)
 
-        // Display initial data
-        view.displayData();
+    // Display initial data
+    view.displayData()
 
-        // Get user input and update data
-        view.getUserInput();
+    // Get user input and update data
+    view.getUserInput()
 
-        // Display updated data
-        view.displayData();
-    }
+    // Display updated data
+    view.displayData()
 }
-
-
 
 /*
 ViewModel: Get data.
 Model: Get data.
 Display Data: Default.
-View: Enter user input: hello, world!
+View: Enter user input: Hello, World!
 ViewModel: Set data.
 Model: Set data.
 ViewModel: Get data.
 Model: Get data.
-Display Data: hello, world!
+Display Data: Hello, World!
 */

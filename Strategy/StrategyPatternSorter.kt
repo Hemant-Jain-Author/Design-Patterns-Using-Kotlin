@@ -49,6 +49,7 @@ class StrategyClass(private var sorter: Sorting) {
     }
 }
 
+// Client code
 fun main() {
     val a = intArrayOf(4, 5, 3, 2, 6, 7, 1, 8, 9, 10)
     val s = StrategyClass(BubbleSort())

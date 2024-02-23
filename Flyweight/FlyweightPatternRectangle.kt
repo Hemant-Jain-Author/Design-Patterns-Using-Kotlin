@@ -1,30 +1,32 @@
-import java.util.*
+import java.util.HashMap
+import java.util.Random
 
-interface Shape {
-    fun draw(x1: Int, y1: Int, x2: Int, y2: Int)
+// Shape abstract class
+abstract class Shape(val colour: Int) {
+    abstract fun draw(x1: Int, y1: Int, x2: Int, y2: Int) // Extrinsic State
 }
 
-// Rectangle class implementing Shape
-open class Rectangle(private val colour: String) : Shape {
+// Rectangle class
+class Rectangle(colour: Int) : Shape(colour) {
     override fun draw(x1: Int, y1: Int, x2: Int, y2: Int) {
-        println("Draw rectangle color: $colour topleft: ($x1,$y1) rightBottom: ($x2,$y2)")
-
+        println("Draw Rectangle colour:$colour topleft: ($x1,$y1) rightBottom: ($x2,$y2)")
     }
 }
 
 // RectangleFactory class
 class RectangleFactory {
-    private val shapes: MutableMap<String, Shape> = HashMap()
+    private val shapes: MutableMap<Int, Shape> = HashMap()
 
-    fun getRectangle(colour: String): Shape? {
+    fun getRectangle(colour: Int): Shape {
         if (!shapes.containsKey(colour)) {
             shapes[colour] = Rectangle(colour)
         }
-        return shapes[colour]
+        return shapes[colour]!!
     }
 
-    val count: Int
-        get() = shapes.size
+    fun getCount(): Int {
+        return shapes.size
+    }
 }
 
 // Client code
@@ -32,9 +34,9 @@ fun main() {
     val factory = RectangleFactory()
     val random = Random()
 
-    for (i in 0..99) {
-        val rectangle = factory.getRectangle(random.nextInt(1000).toString())
-        rectangle!!.draw(random.nextInt(100), random.nextInt(100), random.nextInt(100), random.nextInt(100))
+    repeat(1000) {
+        val rect = factory.getRectangle(random.nextInt(1000))
+        rect.draw(random.nextInt(100), random.nextInt(100), random.nextInt(100), random.nextInt(100))
     }
-    println(factory.count)
+    println(factory.getCount())
 }

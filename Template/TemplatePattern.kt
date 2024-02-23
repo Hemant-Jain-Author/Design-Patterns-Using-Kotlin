@@ -28,6 +28,7 @@ class ConcreteClass2 : AbstractClass() {
     }
 }
 
+// Client code
 fun main() {
     val concreteClass: AbstractClass = ConcreteClass1()
     concreteClass.templateMethod()

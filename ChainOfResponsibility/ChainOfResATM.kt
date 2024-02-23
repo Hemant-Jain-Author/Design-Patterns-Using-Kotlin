@@ -17,6 +17,7 @@ class ATMHandler(successor: ATMHandlerAbstract?, denomination: Int) : ATMHandler
     }
 }
 
+// Client code.
 fun main() {
     val handler: ATMHandlerAbstract = ATMHandler(
             ATMHandler(

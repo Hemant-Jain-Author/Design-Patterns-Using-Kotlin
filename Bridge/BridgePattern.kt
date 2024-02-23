@@ -1,28 +1,30 @@
-interface Abstraction {
-    fun operation()
+// Abstraction abstract class
+abstract class Abstraction {
+    abstract val imp: Implementor
+    abstract fun operation()
 }
 
-// Implementor interface
-interface Implementor {
-    fun operation()
+// Implementor abstract class
+abstract class Implementor {
+    abstract fun operation()
 }
 
 // ConcreteImplementor1 class
-class ConcreteImplementor1 : Implementor {
+class ConcreteImplementor1 : Implementor() {
     override fun operation() {
         println("ConcreteImplementor1 operation")
     }
 }
 
 // ConcreteImplementor2 class
-class ConcreteImplementor2 : Implementor {
+class ConcreteImplementor2 : Implementor() {
     override fun operation() {
         println("ConcreteImplementor2 operation")
     }
 }
 
 // ConcreteAbstraction class
-class ConcreteAbstraction(private val imp: Implementor) : Abstraction {
+class ConcreteAbstraction(override val imp: Implementor) : Abstraction() {
     override fun operation() {
         imp.operation()
     }

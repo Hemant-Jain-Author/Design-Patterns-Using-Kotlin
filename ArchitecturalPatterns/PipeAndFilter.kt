@@ -1,72 +1,61 @@
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayList
 
 // Filter Base Class
 abstract class Filter {
-    abstract String process(String data);
+    abstract fun process(data: String): String
 }
 
 // Filters
-class CapitalizeFilter extends Filter {
-    @Override
-    String process(String data) {
-        return data.toUpperCase();
+class CapitalizeFilter : Filter() {
+    override fun process(data: String): String {
+        return data.uppercase()
     }
 }
 
-class ReplaceSpaceFilter extends Filter {
-    @Override
-    String process(String data) {
-        return data.replace(" ", "_");
+class ReplaceSpaceFilter : Filter() {
+    override fun process(data: String): String {
+        return data.replace(" ", "_")
     }
 }
 
-class RemoveSpecialCharactersFilter extends Filter {
-    @Override
-    String process(String data) {
-        String specialCharacters = ",@!";
-        StringBuilder result = new StringBuilder();
-        for (char c : data.toCharArray()) {
-            if (specialCharacters.indexOf(c) == -1) {
-                result.append(c);
+class RemoveSpecialCharactersFilter : Filter() {
+    override fun process(data: String): String {
+        val specialCharacters = ",@!"
+        val result = StringBuilder()
+        for (c in data.toCharArray()) {
+            if (!specialCharacters.contains(c)) {
+                result.append(c)
             }
         }
-        return result.toString();
+        return result.toString()
     }
 }
 
 // Data Processing Pipeline
 class DataProcessingPipeline {
-    private List<Filter> filters;
+    private val filters: MutableList<Filter> = ArrayList()
 
-    public DataProcessingPipeline() {
-        this.filters = new ArrayList<>();
+    fun addFilter(filter: Filter) {
+        filters.add(filter)
     }
 
-    public void addFilter(Filter filter) {
-        this.filters.add(filter);
-    }
-
-    public String processData(String data) {
-        for (Filter filter : this.filters) {
-            data = filter.process(data);
+    fun processData(data: String): String {
+        var processedData = data
+        for (filter in filters) {
+            processedData = filter.process(processedData)
         }
-        return data;
+        return processedData
     }
 }
 
-// Main class
-public class PipeAndFilter {
-    public static void main(String[] args) {
-        DataProcessingPipeline pipeline = new DataProcessingPipeline();
-        pipeline.addFilter(new CapitalizeFilter());
-        pipeline.addFilter(new ReplaceSpaceFilter());
-        pipeline.addFilter(new RemoveSpecialCharactersFilter());
+// Client code.
+fun main() {
+    val pipeline = DataProcessingPipeline()
+    pipeline.addFilter(CapitalizeFilter())
+    pipeline.addFilter(ReplaceSpaceFilter())
+    pipeline.addFilter(RemoveSpecialCharactersFilter())
 
-        String data = "Hello, World!";
-        String result = pipeline.processData(data);
-        System.out.println("Result: " + result);  // Output: "HELLO_WORLD"
-    }
+    val data = "Hello, World!"
+    val result = pipeline.processData(data)
+    println("Result: $result")  // Output: "HELLO_WORLD"
 }
-

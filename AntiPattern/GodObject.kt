@@ -1,39 +1,33 @@
-public class GodsObject {
-    private List<Object> data;
-    private User user;
-    private Database db;
-    private Mailer mailer;
+class GodsObject {
+    private val data: MutableList<Any> = mutableListOf()
+    private val user: User = User()
+    private val db: Database = Database()
+    private val mailer: Mailer = Mailer()
 
-    public GodObject() {
-        this.data = new ArrayList<>();
-        this.user = new User();
-        this.db = new Database();
-        this.mailer = new Mailer();
-    }
-
-    public void processData() {
+    fun processData() {
         // Process data
-        this.db.connect();
-        this.user.authenticate();
-        this.data = this.db.query();
-        this.db.disconnect();
+        db.connect()
+        user.authenticate()
+        data.clear()
+        data.addAll(db.query())
+        db.disconnect()
     }
 
-    public void validateData() {
+    fun validateData() {
         // Validate data
-        this.user.authorize();
-        this.db.connect();
-        this.db.validate();
-        this.db.disconnect();
+        user.authorize()
+        db.connect()
+        db.validate()
+        db.disconnect()
     }
 
-    public void sendNotification() {
+    fun sendNotification() {
         // Send notification
-        this.user.authorize();
-        this.db.connect();
-        List<Object> data = this.db.query();
-        this.mailer.sendEmail(data);
-        this.db.disconnect();
+        user.authorize()
+        db.connect()
+        val data = db.query()
+        mailer.sendEmail(data)
+        db.disconnect()
     }
 
     // And so on...

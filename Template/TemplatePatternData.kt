@@ -38,6 +38,7 @@ class AddDataToDB : AddDataTemplate() {
     }
 }
 
+// Client code
 fun main() {
     val addDataToDB: AddDataTemplate = AddDataToDB()
     addDataToDB.addData()

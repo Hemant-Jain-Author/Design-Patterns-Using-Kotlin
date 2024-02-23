@@ -24,6 +24,7 @@ class Database private constructor() {
     }
 }
 
+// Client code.
 fun main() {
     val s1 = Database.getInstance()
     val s2 = Database.getInstance()
@@ -33,3 +34,10 @@ fun main() {
 
     s2.addData("Hello, world!")
 }
+
+/*
+Database created
+Database@6bc7c054
+Database@6bc7c054
+Hello, world!
+*/

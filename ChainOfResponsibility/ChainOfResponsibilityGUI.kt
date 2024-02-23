@@ -45,6 +45,7 @@ class Panel : Handler(null) {
     }
 }
 
+// Client code.
 fun main() {
     val p = Panel()
     p.setHelperText("Panel help text.")

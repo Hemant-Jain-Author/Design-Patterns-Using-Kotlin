@@ -33,6 +33,7 @@ class ConcreteIterator(private val aggregate: ConcreteAggregate) : Iterator<Int>
     }
 }
 
+// Client Code
 fun main() {
     val aggregate = ConcreteAggregate()
     for (i in 0..9) {

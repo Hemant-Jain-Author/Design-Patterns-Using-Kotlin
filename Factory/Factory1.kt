@@ -1,3 +1,4 @@
+// Product interface
 interface Product {
     fun operation()
 }

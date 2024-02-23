@@ -55,6 +55,7 @@ class SuperHero : AbstractWorker() {
 }
 
 
+// Client code
 fun main() {
     val doctor = Doctor()
     doctor.dailyRoutine()

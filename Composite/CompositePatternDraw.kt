@@ -1,3 +1,4 @@
+// Interface IShape
 interface IShape {
     fun move(x: Int, y: Int)
     fun draw(): String

@@ -38,6 +38,7 @@ class ConcreteAggregate : Aggregate {
     }
 }
 
+// Client Code
 fun main() {
     val aggregate = ConcreteAggregate()
     for (i in 0..4) {

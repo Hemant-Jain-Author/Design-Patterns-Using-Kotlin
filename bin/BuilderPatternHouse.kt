@@ -1,3 +1,4 @@
+// A class representing a house
 class House(private var wall: String, private var roof: String) {
     fun setWall(wall: String) {
         this.wall = wall
